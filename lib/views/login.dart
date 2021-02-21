@@ -32,33 +32,86 @@ class _LoginPageState extends State<LoginPage> {
               width: size.width * 0.35,
             ),
             Positioned(
-              top: 160.0,
-              left: 50.0,
+              top: 120.0,
+              left: 40.0,
               child: //Text("MAKE AN AGREEMENT" , style: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold)),
               Container(
                 child: Column(
                   children: <Widget>[
                     SvgPicture.asset(
-                      "assets/icons/login.svg", height: size.height * 0.3,
+                      "assets/icons/login.svg", height: size.height * 0.33,
                     ),
                   ],
                 ),
               ),
             ),
             Positioned(
-              bottom: 180.0,
-              left: 70.0,
-              right: 70.0,
+              bottom: 320.0,
+              left: 45.0,
+              right: 50.0,
+                child: SingleChildScrollView(
+                    child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      prefixIcon: Icon(
+                      Icons.person,
+                      size: 20.0,
+                      color: kPrimaryColor,
+                      ),
+                      hintText: "Email/Contact No",
+                    ),
+                  ),
+                ),
+            ),
+
+             
+
+            //for password
+            Positioned(
+              bottom: 245.0,
+              left: 45.0,
+              right: 50.0,
+                child: SingleChildScrollView(
+                    child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      prefixIcon: Icon(
+                      Icons.lock,
+                      size: 20.0,
+                      color: kPrimaryColor,
+                      ),
+                      hintText: "Password",
+                      suffixIcon: Icon(Icons.visibility,
+                      size: 20.0,
+                      color: kPrimaryColor, 
+                      ),
+                    ),
+                  ),
+                ),
+            ),
+            Positioned(
+              bottom: 175.0,
+              left: 45.0,
+              right: 50.0,
                 child: SizedBox(
                   height: size.height * 0.062,
                   width: size.width * 0.68,
                   child: RaisedButton(
-                  onPressed: (){},
+                  onPressed: (){
+            //         Navigator.push(
+            //         context,
+            //         MaterialPageRoute(builder: (context) => LoginPage()),
+            // );
+                  },
                   color: kPrimaryColor,
                   child: Row(
                     children: <Widget>[
-                      Padding(padding: const EdgeInsets.only(left: 37.0),),
-                      Text("ADD AN AGREEMENT" , style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      Padding(padding: const EdgeInsets.only(left: 100.0),),
+                      Text("Login" , style: TextStyle(color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.bold)),
                     ]
                   ),
                 ),
@@ -70,3 +123,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+
+
+//EELLLEEEVATION

@@ -14,7 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   Size size = MediaQuery.of(context).size; 
     //THIS size PROVIDES US THE TOTAL HEIGHT AND WIDTH OF OUR SCREEN
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
         height: size.height,
         width: double.infinity,
         child: Stack(
@@ -49,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
               bottom: 320.0,
               left: 45.0,
               right: 50.0,
-                child: SingleChildScrollView(
                     child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -64,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-            ),
 
              
 
@@ -119,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ], 
         ),
+      ),
       ),
     );
   }

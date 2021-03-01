@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:rentapp/views/constants.dart';
+import 'package:rentapp/helper/constants.dart';
 import 'package:rentapp/views/login.dart';
 
 class WelcomePage extends StatefulWidget {

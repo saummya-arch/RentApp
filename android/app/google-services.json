@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "675718898482",
+    "project_id": "rental-app-64976",
+    "storage_bucket": "rental-app-64976.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675718898482:android:cf2e442d472be0cda8ad2b",
+        "android_client_info": {
+          "package_name": "RentalApp.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675718898482-3vusii953gps48f60r37rab61rulc6f2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "RentalApp.demo",
+            "certificate_hash": "c851fcf70d6b5136ac28a315f43095c32fe3fed4"
+          }
+        },
+        {
+          "client_id": "675718898482-8fmpo97o4g07mbun6jv5c5vhjhqh4npb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMJBC0OpbmtPOnnMhdkdxXBvzVdQjXxOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675718898482-8fmpo97o4g07mbun6jv5c5vhjhqh4npb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

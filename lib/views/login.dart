@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rentapp/helper/constants.dart';
+import 'package:rentapp/helper/helperfunctions.dart';
 import 'package:rentapp/services/auth.dart';
 import 'package:rentapp/services/database.dart';
+import 'package:rentapp/views/landingpage.dart';
 import 'package:rentapp/views/signup.dart';
+import 'package:rentapp/views/upload.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -29,6 +33,50 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController emailTextEditingController = new TextEditingController();
   TextEditingController passwordTextEditingController = new TextEditingController();
+
+
+
+
+  QuerySnapshot snapshotUserInfo;
+
+  afterSignInValidation(){
+
+    if(formKey.currentState.validate()){
+
+
+      HelperFunctions.saveUserEmailSharedPreference(emailTextEditingController.text);
+
+      databaseMethods.getUserByUserEmail(emailTextEditingController.text)
+          .then((val){
+              snapshotUserInfo = val;
+              HelperFunctions.saveUserNameSharedPreference(snapshotUserInfo.documents[1].data["username"]);
+             // print("${snapshotUserInfo.documents[0].data["name"]} this is my world");
+          });
+
+
+
+      setState(() {
+        isLoading = true;
+      });
+
+
+      authMethods.signInWithEmailAndPassword(emailTextEditingController.text, passwordTextEditingController.text)
+          .then((val){
+             if(val!= null) {
+                HelperFunctions.saveUserLoggedInSharedPreference(true);
+
+             Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LandingPage()));
+             }
+
+          });      
+      }
+
+  }    
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: size.width * 0.68,
                   child: RaisedButton(
                     onPressed: () {
+                      afterSignInValidation();
                       //         Navigator.push(
                       //         context,
                       //         MaterialPageRoute(builder: (context) => LoginPage()),

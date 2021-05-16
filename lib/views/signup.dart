@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rentapp/helper/helperfunctions.dart';
 import 'package:rentapp/services/auth.dart';
 import 'package:rentapp/services/database.dart';
 import 'package:rentapp/helper/constants.dart';
+import 'package:rentapp/views/landingpage.dart';
 import 'package:rentapp/views/login.dart';
-import 'package:rentapp/views/temp.dart';
+import 'package:rentapp/views/upload.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -45,6 +47,26 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
 
+  Future<bool> _onGoogleBackPressed() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Do you want to exit."),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.pop(context,false),
+             child: Text("No"),
+            ),
+          FlatButton(
+            onPressed: () => Navigator.pop(context,true),
+             child: Text("Yes"),
+            ),  
+        ],
+      ),
+    );
+  }
+
+
 
   
 
@@ -76,13 +98,13 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
         Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => TemporaryPage())
+          context, MaterialPageRoute(builder: (context) => LandingPage())
         );
       });
     }
   }
 
-
+  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -346,10 +368,23 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         shape: BoxShape.circle,
                       ),
-                      child: SvgPicture.asset(
-                        "assets/icons/google-plus.svg",
-                        height: 10.0,
-                        width: 10.0,
+                      child: WillPopScope(
+                        onWillPop: _onGoogleBackPressed,
+                        child: GestureDetector(
+                          onTap: (){
+                            authMethods.googleSignUp().whenComplete(() =>
+                            Navigator.push(
+                            context,
+                              MaterialPageRoute(builder: (context) => LandingPage()),
+                          ),
+                            );
+                          },
+                          child: SvgPicture.asset(
+                            "assets/icons/google-plus.svg",
+                            height: 10.0,
+                            width: 10.0,
+                          ),
+                        ),
                       ),
                     ),
                   ],

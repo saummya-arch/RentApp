@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:rentapp/services/database.dart';
 import 'package:rentapp/models/user.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
@@ -18,6 +23,48 @@ class AuthMethods {
       print(e.toString());
     }
   }
+
+  Future<void> googleSignUp() async {
+    try {
+      final GoogleSignIn _googleSignIn = GoogleSignIn(
+        scopes: [
+          'email'
+        ],
+      );
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+      print("signed in " + user.displayName);
+
+       Map<String, String> userInfoMap = {
+        "username" : user.displayName,
+        "email" : user.email,
+      };
+
+      databaseMethods.uploadUserInfo(userInfoMap);
+
+
+      // switch () {
+      //   case :
+          
+      //     break;
+      //   default:
+      // }
+
+      return user;
+    }catch (e) {
+      print(e.message);
+    }
+  }
+  
 
   Future signUpWithEmailAndPassword(String email, String password) async {
     try {
